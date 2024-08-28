@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.utils import extract
+from src.utils import extract, provide_mode
 
 
 def test_extract() -> None:
@@ -52,3 +52,13 @@ def test_extract() -> None:
 )
 def test_extract_bad_input(test_input0: Any, test_input1: Any) -> None:
     assert extract(test_input0, test_input1) is None
+
+
+def test_provide_mode_raises(operations: Any) -> None:
+    with pytest.raises(TypeError):
+        provide_mode("abobus", mode=123)
+
+    with pytest.raises(ValueError) as ex:
+        provide_mode(operations, mode="abobus")
+
+    assert str(ex) == "<ExceptionInfo ValueError('Unknown mode') tblen=2>"
