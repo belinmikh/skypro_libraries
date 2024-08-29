@@ -128,14 +128,17 @@ def test_get_stocks_raises() -> None:
 def test_stocks_to_rub(mock: Any) -> None:
     mock.return_value = 100.0
 
-    assert stocks_to_rub({"BIMBIM": 0.5, "BAMBAM": 1.5}) == {"BIMBIM": 50.0, "BAMBAM": 150.0}
+    assert stocks_to_rub({"BIMBIM": 0.5, "BAMBAM": 1.5}) == [
+        {"stock": "BIMBIM", "price": 50.0},
+        {"stock": "BAMBAM", "price": 150.0}
+    ]
 
     mock.assert_called_once_with(1.0, "USD")
 
 
 @patch("src.external_api.convert_currency")
 def test_stocks_to_rub_empty(mock: Any) -> None:
-    assert stocks_to_rub(dict()) == dict()
+    assert stocks_to_rub(dict()) == []
     assert not mock.called
 
 

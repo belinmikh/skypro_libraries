@@ -86,7 +86,7 @@ def get_stocks(*args: str) -> dict:
     return to_return
 
 
-def stocks_to_rub(stocks: dict) -> dict | None:
+def stocks_to_rub(stocks: dict) -> list[dict] | None:
     """Converts stocks exchange rates to RUB
 
     :param stocks: {stock: amount(USD)} formatted dict
@@ -99,14 +99,21 @@ def stocks_to_rub(stocks: dict) -> dict | None:
             raise TypeError("Stocks dict format is unacceptable")
 
     if len(stocks) == 0:
-        return dict()
+        return []
 
     # traffic economy (calling just once)
     exchange = convert_currency(1.0, "USD")
     if not exchange:
         return None
 
-    to_return = dict()
+    # to_return = dict()
+    to_return = []
     for sym in stocks.keys():
-        to_return.update({sym: round(stocks[sym] * exchange, 2)})
+        to_return.append(
+            {
+                "stock": sym,
+                "price": round(stocks[sym] * exchange, 2)
+            }
+        )
+        # to_return.update({sym: round(stocks[sym] * exchange, 2)})
     return to_return

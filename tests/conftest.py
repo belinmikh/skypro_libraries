@@ -62,6 +62,7 @@ def ms_ok() -> dict:
 
 
 # for fixtures below
+# WARN: fixtures for views are pre-counted for current test operations
 def operations_raw() -> list[dict]:
     return [
         {
@@ -1817,3 +1818,60 @@ def ops_str_search() -> list[dict]:
     #     )
     ops = [op for op in ops if ("банк" in extract(op, ("Категория",))) or ("банк" in extract(op, ("Описание",)))]
     return ops
+
+
+@pytest.fixture
+def ops_cards_stats() -> list[dict]:
+    return [
+        {
+            'last_digits': '7197',
+            'total_spent': 15462.49,
+            'cashback': 0
+        },
+        {
+            'last_digits': '5091',
+            'total_spent': 3394.27,
+            'cashback': 0
+        },
+        {
+            'last_digits': '4556',
+            'total_spent': 2822.8,
+            'cashback': 140.0
+        }
+    ]
+
+
+@pytest.fixture
+def ops_top() -> list[dict]:
+    return [
+        {
+            'date': '30.12.2021',
+            'amount': 174000.0,
+            'category': 'Пополнения',
+            'description': 'Пополнение через Газпромбанк'
+        },
+        {
+            'date': '23.12.2021',
+            'amount': 28001.94,
+            'category': 'Переводы',
+            'description': 'Перевод Кредитная карта. ТП 10.2 RUR'
+        },
+        {
+            'date': '23.12.2021',
+            'amount': 28001.94,
+            'category': 'Переводы',
+            'description': 'Перевод Кредитная карта. ТП 10.2 RUR'
+        },
+        {
+            'date': '31.12.2021',
+            'amount': 20000.0,
+            'category': 'Переводы',
+            'description': 'Константин Л.'
+        },
+        {
+            'date': '23.12.2021',
+            'amount': 20000.0,
+            'category': 'Другое',
+            'description': 'Иван С.'
+        }
+    ]
