@@ -29,7 +29,9 @@ def spending_by_category(transactions: pd.DataFrame,
     begin = date + relativedelta(months=-3)
     # using re.escape just in case somebody puts special symbols to search
     transactions = transactions[
-        transactions["Описание"].str.contains(re.escape(category), regex=True, na=False)
+        transactions["Категория"].str.contains(re.escape(category), regex=True, na=False)
     ]
-    transactions = transactions.loc[begin <= transactions["Дата операции"] <= date]
+    transactions = transactions.loc[
+        (begin <= transactions["Дата операции"]) & (transactions["Дата операции"] <= date)
+    ]
     return provide_mode(transactions, mode=mode)
