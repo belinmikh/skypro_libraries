@@ -1,5 +1,5 @@
-from typing import Literal
 import re
+from typing import Literal
 
 import pandas as pd
 
@@ -28,7 +28,6 @@ def simple_search(
     cat = data[data["Категория"].str.contains(re.escape(pat), regex=True, na=False)]
     data = pd.concat([desc, cat])
     return provide_mode(data, mode=mode)
-
 
 
 def phone_search(
