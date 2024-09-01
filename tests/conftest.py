@@ -1,4 +1,3 @@
-import json
 import re
 
 import pandas as pd
@@ -1779,8 +1778,8 @@ def operations() -> pd.DataFrame:
     for op in ops:
         op.update(
             {
-                "Дата операции": pd.to_datetime(op["Дата операции"], format='%d.%m.%Y %H:%M:%S'),
-                "Дата платежа": pd.to_datetime(op["Дата платежа"], format='%d.%m.%Y')
+                "Дата операции": pd.to_datetime(op["Дата операции"], format="%d.%m.%Y %H:%M:%S"),
+                "Дата платежа": pd.to_datetime(op["Дата платежа"], format="%d.%m.%Y"),
             }
         )
     return pd.DataFrame(ops)
@@ -1790,7 +1789,8 @@ def operations() -> pd.DataFrame:
 def ops_phone() -> list[dict]:
     ops = operations_raw()
     # for op in ops:
-    #     op.update({"Дата операции": pd.to_datetime(op["Дата операции"], dayfirst=True), "Дата платежа": pd.to_datetime(op["Дата платежа"], dayfirst=True)})
+    #     op.update({"Дата операции": pd.to_datetime(op["Дата операции"], dayfirst=True),
+    #     "Дата платежа": pd.to_datetime(op["Дата платежа"], dayfirst=True)})
     pat = re.compile(r"\+7.\d{3}.\d{3}-\d{2}-\d{2}")
     ops = [op for op in ops if pat.search(extract(op, ("Описание",)))]
     return ops
@@ -1800,7 +1800,8 @@ def ops_phone() -> list[dict]:
 def ops_individuals() -> list[dict]:
     ops = operations_raw()
     # for op in ops:
-    #     op.update({"Дата операции": pd.to_datetime(op["Дата операции"], dayfirst=True), "Дата платежа": pd.to_datetime(op["Дата платежа"], dayfirst=True)})
+    #     op.update({"Дата операции": pd.to_datetime(op["Дата операции"], dayfirst=True),
+    #     "Дата платежа": pd.to_datetime(op["Дата платежа"], dayfirst=True)})
     pat = re.compile(r"[А-Я][а-я]+.[А-Я]\.")
     ops = [op for op in ops if pat.search(extract(op, ("Описание",))) and extract(op, ("Категория",)) == "Переводы"]
     return ops
@@ -1823,21 +1824,9 @@ def ops_str_search() -> list[dict]:
 @pytest.fixture
 def ops_cards_stats() -> list[dict]:
     return [
-        {
-            'last_digits': '7197',
-            'total_spent': 15462.49,
-            'cashback': 0
-        },
-        {
-            'last_digits': '5091',
-            'total_spent': 3394.27,
-            'cashback': 0
-        },
-        {
-            'last_digits': '4556',
-            'total_spent': 2822.8,
-            'cashback': 140.0
-        }
+        {"last_digits": "7197", "total_spent": 15462.49, "cashback": 0},
+        {"last_digits": "5091", "total_spent": 3394.27, "cashback": 0},
+        {"last_digits": "4556", "total_spent": 2822.8, "cashback": 140.0},
     ]
 
 
@@ -1845,33 +1834,23 @@ def ops_cards_stats() -> list[dict]:
 def ops_top() -> list[dict]:
     return [
         {
-            'date': '30.12.2021',
-            'amount': 174000.0,
-            'category': 'Пополнения',
-            'description': 'Пополнение через Газпромбанк'
+            "date": "30.12.2021",
+            "amount": 174000.0,
+            "category": "Пополнения",
+            "description": "Пополнение через Газпромбанк",
         },
         {
-            'date': '23.12.2021',
-            'amount': 28001.94,
-            'category': 'Переводы',
-            'description': 'Перевод Кредитная карта. ТП 10.2 RUR'
+            "date": "23.12.2021",
+            "amount": 28001.94,
+            "category": "Переводы",
+            "description": "Перевод Кредитная карта. ТП 10.2 RUR",
         },
         {
-            'date': '23.12.2021',
-            'amount': 28001.94,
-            'category': 'Переводы',
-            'description': 'Перевод Кредитная карта. ТП 10.2 RUR'
+            "date": "23.12.2021",
+            "amount": 28001.94,
+            "category": "Переводы",
+            "description": "Перевод Кредитная карта. ТП 10.2 RUR",
         },
-        {
-            'date': '31.12.2021',
-            'amount': 20000.0,
-            'category': 'Переводы',
-            'description': 'Константин Л.'
-        },
-        {
-            'date': '23.12.2021',
-            'amount': 20000.0,
-            'category': 'Другое',
-            'description': 'Иван С.'
-        }
+        {"date": "31.12.2021", "amount": 20000.0, "category": "Переводы", "description": "Константин Л."},
+        {"date": "23.12.2021", "amount": 20000.0, "category": "Другое", "description": "Иван С."},
     ]

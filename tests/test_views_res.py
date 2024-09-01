@@ -1,6 +1,6 @@
 import pytest
 
-from src.views_res import greetings, cards_stats, top_transactions
+from src.views_res import cards_stats, greetings, top_transactions
 
 
 def test_greetings() -> None:

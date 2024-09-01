@@ -1,7 +1,3 @@
-import json
-
-import numpy as np
-
 from src.services import phone_search, search_individuals, simple_search
 
 

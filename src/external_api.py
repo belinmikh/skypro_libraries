@@ -109,11 +109,6 @@ def stocks_to_rub(stocks: dict) -> list[dict] | None:
     # to_return = dict()
     to_return = []
     for sym in stocks.keys():
-        to_return.append(
-            {
-                "stock": sym,
-                "price": round(stocks[sym] * exchange, 2)
-            }
-        )
+        to_return.append({"stock": sym, "price": round(stocks[sym] * exchange, 2)})
         # to_return.update({sym: round(stocks[sym] * exchange, 2)})
     return to_return

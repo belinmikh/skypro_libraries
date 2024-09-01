@@ -23,8 +23,8 @@ def read_xlsx(path: str) -> pd.DataFrame:
         raise ValueError("Name of file should ends with .xlsx")
     try:
         data = pd.read_excel(path)
-        data["Дата операции"] = pd.to_datetime(data["Дата операции"], format='%d.%m.%Y %H:%M:%S')
-        data["Дата платежа"] = pd.to_datetime(data["Дата платежа"], format='%d.%m.%Y')
+        data["Дата операции"] = pd.to_datetime(data["Дата операции"], format="%d.%m.%Y %H:%M:%S")
+        data["Дата платежа"] = pd.to_datetime(data["Дата платежа"], format="%d.%m.%Y")
         return data
     except FileNotFoundError:
         logger.error(f"{path} is missing")
@@ -61,5 +61,7 @@ def saves(path: str = "") -> Callable:
                     json.dump(res, f)
                 logger.info("saved default")
             return res
+
         return wrapper
+
     return saves_internal

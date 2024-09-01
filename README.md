@@ -1,2 +1,25 @@
-https://marketstack.com/
-https://apilayer.com/marketplace/exchangerates_data-api
+# Курсовая работа модуля "библиотеки"
+
+## Программа использует следующие внешние API:
+### для получения стоимости акций:
+    https://marketstack.com/
+### для получения курса валют:
+    https://apilayer.com/marketplace/exchangerates_data-api
+
+## Перед запуском убедитесь в наличии соответствующих
+## ключей в файле .env (используйте образец .env.example)
+
+## Основные реализованные функции:
+## (подробное описание работы каждой см. в docstring)
+###  - main_page (Веб-страницы, главная)
+###  - simple_search (Сервисы, Простой поиск)
+###  - search_individuals (Сервисы, Поиск переводов физическим лицам)
+###  - phone_search (Сервисы, Поиск по телефонным номерам)
+###  - spending by category (Отчёты, поиск по категории)
+
+## Пример применения всех перечисленных функций реализован в main.py:
+```shell
+python main.py
+```
+
+### _sky.pro // indpd58.0 // Belin Mikhail_
